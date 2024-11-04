@@ -1,5 +1,6 @@
 package edu.jsia.api.servicios;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,9 @@ public class ClubController {
     }
 
     @PostMapping
-    public Club createClub(@RequestBody Club club) {
-        return clubService.createClub(club);
+    public ResponseEntity<Club> createClub(@RequestBody Club club) {
+        Club nuevoClub = clubService.createClub(club);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoClub);
     }
 
     @PutMapping("/{id}")
